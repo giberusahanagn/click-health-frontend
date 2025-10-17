@@ -1,0 +1,110 @@
+﻿@page "/admin/approvals"
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using ClickHealthFrontend.Models
+using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize(Roles = "Admin")]
+@inject HttpClient Http
+
+<div class="admin-container">
+    <h2>User Approvals</h2>
+
+    @if (pendingUsers == null)
+    {
+        <p>Loading...</p>
+    }
+    else if (pendingUsers.Count == 0)
+    {
+        <p>No pending users</p>
+    }
+    else
+    {
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Territory</th>
+                    <th>Language</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in pendingUsers)
+                {
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>@user.Territory</td>
+                        <td>@user.Language</td>
+                        <td>
+                            <button @onclick="@(async () => await ApproveUser(user.Email))" class="btn-approve">
+                                Approve
+                            </button>
+                            <button @onclick="@(async () => await RejectUser(user.Email))" class="btn-reject">
+                                Reject
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<PendingUserDto> pendingUsers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPendingUsers();
+    }
+
+    private async Task LoadPendingUsers()
+    {
+        try
+        {
+            pendingUsers = await Http.GetFromJsonAsync<List<PendingUserDto>>("https://your-backend-url/api/admin/pending-users") ?? new();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading users: {ex.Message}");
+        }
+    }
+
+    private async Task ApproveUser(string email)
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync($"https://your-backend-url/api/admin/approve-user/{email}", "");
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadPendingUsers();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    private async Task RejectUser(string email)
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync($"https://your-backend-url/api/admin/reject-user/{email}", "");
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadPendingUsers();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+}

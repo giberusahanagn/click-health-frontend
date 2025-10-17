@@ -1,0 +1,364 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\build\\Microsoft.NET.Sdk.WebAssembly.Browser.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\layout\\loginlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\layout\\loginlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\.vsdbgsrc\\44aa595dc2a1078aa662bebf92f46ec0aa83d37961bfc5ec1f12f1b995219153\\AddressBinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\pages\\adminapprovals.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\pages\\adminapprovals.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\pages\\userdashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\pages\\userdashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\models\\pendinguserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\models\\pendinguserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\clickhealthfrontend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\clickhealthfrontend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\auth\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\auth\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|c:\\users\\lenovo\\source\\repos\\clickhealthfrontend\\clickhealthfrontend\\auth\\customauthstateprovider.cs||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7A7174D-97AE-423A-A3B5-E909B1FF5B93}|ClickHealthFrontend\\ClickHealthFrontend.csproj|solutionrelative:clickhealthfrontend\\auth\\customauthstateprovider.cs||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Microsoft.NET.Sdk.WebAssembly.Browser.targets",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\build\\Microsoft.NET.Sdk.WebAssembly.Browser.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\build\\Microsoft.NET.Sdk.WebAssembly.Browser.targets",
+              "ToolTip": "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\build\\Microsoft.NET.Sdk.WebAssembly.Browser.targets",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\build\\Microsoft.NET.Sdk.WebAssembly.Browser.targets",
+              "ViewState": "AgIAAGYBAAAAAAAAAAAYwG4BAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-10-17T09:28:09.008Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\wwwroot\\index.html",
+              "RelativeToolTip": "ClickHealthFrontend\\wwwroot\\index.html",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAowBgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-17T06:37:55.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Program.cs",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Program.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Program.cs",
+              "RelativeToolTip": "ClickHealthFrontend\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T06:12:11.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\Login.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Pages\\Login.razor",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAmwPMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:01:19.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginLayout.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Layout\\LoginLayout.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Layout\\LoginLayout.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Layout\\LoginLayout.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Layout\\LoginLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:14:25.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Register.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\Register.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Pages\\Register.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\Register.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Pages\\Register.razor",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAwwNUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T05:54:35.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\App.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\App.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\App.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:08:54.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AdminApprovals.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\AdminApprovals.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Pages\\AdminApprovals.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\AdminApprovals.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Pages\\AdminApprovals.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:11:59.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AddressBinder.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\.vsdbgsrc\\44aa595dc2a1078aa662bebf92f46ec0aa83d37961bfc5ec1f12f1b995219153\\AddressBinder.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\44aa595dc2a1078aa662bebf92f46ec0aa83d37961bfc5ec1f12f1b995219153\\AddressBinder.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\.vsdbgsrc\\44aa595dc2a1078aa662bebf92f46ec0aa83d37961bfc5ec1f12f1b995219153\\AddressBinder.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\44aa595dc2a1078aa662bebf92f46ec0aa83d37961bfc5ec1f12f1b995219153\\AddressBinder.cs [Read Only]",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAAwNIAAAANAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T07:38:53.155Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "ClickHealthFrontend\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAB4AAAAAAAAAAADwvykAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-17T08:20:24.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\Home.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T05:54:34.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserDashboard.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\UserDashboard.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Pages\\UserDashboard.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Pages\\UserDashboard.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Pages\\UserDashboard.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:16:01.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\wwwroot\\app.css",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\wwwroot\\app.css",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\wwwroot\\app.css",
+              "RelativeToolTip": "ClickHealthFrontend\\wwwroot\\app.css",
+              "ViewState": "AgIAAMUCAAAAAAAAAAAuwNICAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-17T06:42:44.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\wwwroot\\css\\app.css",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\wwwroot\\css\\app.css",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\wwwroot\\css\\app.css",
+              "RelativeToolTip": "ClickHealthFrontend\\wwwroot\\css\\app.css",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAowHEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-10-17T06:17:21.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PendingUserDto.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Models\\PendingUserDto.cs",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Models\\PendingUserDto.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Models\\PendingUserDto.cs",
+              "RelativeToolTip": "ClickHealthFrontend\\Models\\PendingUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T06:33:49.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ClickHealthFrontend.csproj",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\ClickHealthFrontend.csproj",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\ClickHealthFrontend.csproj",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\ClickHealthFrontend.csproj",
+              "RelativeToolTip": "ClickHealthFrontend\\ClickHealthFrontend.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-17T06:28:17.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAADQAAAAAAAAAAAAwwEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:09:25.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\_Imports.razor",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\_Imports.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\_Imports.razor",
+              "RelativeToolTip": "ClickHealthFrontend\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-17T06:27:12.233Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CustomAuthStateProvider.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "RelativeToolTip": "ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T06:13:38.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CustomAuthStateProvider.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "RelativeDocumentMoniker": "ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\ClickHealthFrontend\\ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "RelativeToolTip": "ClickHealthFrontend\\Auth\\CustomAuthStateProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T06:10:08.434Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

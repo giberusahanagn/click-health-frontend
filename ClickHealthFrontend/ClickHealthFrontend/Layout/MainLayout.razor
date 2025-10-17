@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@using ClickHealthFrontend.Auth
+@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="page">
+    <div class="sidebar">
+        <nav class="navbar">
+            <div class="navbar-header">
+                <h3>ClickHealth</h3>
+            </div>
+            <ul class="nav-menu">
+                @if (userRole == "Admin")
+                {
+                    <li><a href="/admin/approvals">User Approvals</a></li>
+                    <li><a href="/admin/users">All Users</a></li>
+                    <li><a href="/admin/settings">Settings</a></li>
+                }
+                else if (userRole == "Doctor" || userRole == "Patient")
+                {
+                    <li><a href="/user/dashboard">Dashboard</a></li>
+                    <li><a href="/user/profile">Profile</a></li>
+                }
+                <li><a href="#" @onclick="Logout" @onclick:preventDefault>Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header class="top-navbar">
+            <div class="user-info">
+                <span>@userEmail</span>
+                <span class="role-badge">@userRole</span>
+            </div>
+        </header>
+        <main>
+            @Body
+        </main>
+    </div>
+</div>
+
+@code {
+    private string userEmail = "";
+    private string userRole = "";
+    private ClaimsPrincipal user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
+
+        if (user.Identity?.IsAuthenticated ?? false)
+        {
+            userEmail = user.FindFirst(ClaimTypes.Email)?.Value ?? "";
+            userRole = user.FindFirst(ClaimTypes.Role)?.Value ?? "";
+        }
+    }
+
+    private async Task Logout()
+    {
+        var authProvider = (CustomAuthStateProvider)AuthStateProvider;
+        await authProvider.LogoutAsync();
+        Navigation.NavigateTo("/login", forceLoad: true);
+    }
+}

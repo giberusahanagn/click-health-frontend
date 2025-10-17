@@ -1,0 +1,269 @@
+﻿@page "/login"
+@using System.ComponentModel.DataAnnotations
+@using System.Net.Http.Json
+@layout LoginLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="login-container flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="login-box bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-semibold text-center mb-4">ClickHealth Login</h2>
+
+        @if (!isResetMode)
+        {
+            <!-- Tabs for password / OTP -->
+            <div class="tabs flex justify-center mb-4">
+                <button class="tab @(loginMode == "password" ? "active" : "")"
+                        @onclick="@(() => SwitchMode("password"))">
+                    Email & Password
+                </button>
+                <button class="tab @(loginMode == "otp" ? "active" : "")"
+                        @onclick="@(() => SwitchMode("otp"))">
+                    OTP Login
+                </button>
+            </div>
+
+            @if (loginMode == "password")
+            {
+                <EditForm Model="passwordLogin" OnValidSubmit="LoginWithPassword">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <InputText type="email" @bind-Value="passwordLogin.Email" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <InputText type="password" @bind-Value="passwordLogin.Password" required />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full mt-4">Login</button>
+                </EditForm>
+            }
+            else
+            {
+                <EditForm Model="otpLogin" OnValidSubmit="LoginWithOtp">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <InputText type="email" @bind-Value="otpLogin.Email" required />
+                        </div>
+                        <button type="button" @onclick="SendOtp" class="btn btn-secondary w-full mt-2">Send OTP</button>
+
+                        @if (otpSent)
+                        {
+                            <div class="form-group mt-2">
+                                <label>Enter OTP</label>
+                                <InputText type="text" @bind-Value="otpLogin.Otp" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary w-full mt-2">Verify OTP & Login</button>
+                        }
+                    </div>
+                </EditForm>
+            }
+        }
+        else
+        {
+            <!-- Reset password form -->
+            <EditForm Model="resetPasswordModel" OnValidSubmit="ResetPassword">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <h3 class="text-lg font-semibold mb-2">Reset Your Password</h3>
+                <p class="mb-2">An OTP has been sent to your email. Enter it and choose a new password.</p>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="form-group">
+                        <label>OTP</label>
+                        <InputText @bind-Value="resetPasswordModel.Otp" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <InputText type="password" @bind-Value="resetPasswordModel.NewPassword" class="form-control" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-full mt-2">Reset Password</button>
+            </EditForm>
+        }
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger mt-2">@errorMessage</div>
+        }
+
+        <p class="text-center mt-4">
+            Don't have an account? <a href="/register">Register here</a>
+        </p>
+    </div>
+</div>
+
+@code {
+    private string loginMode = "password";
+    private string errorMessage = "";
+    private bool otpSent = false;
+    private bool isResetMode = false;
+
+    private LoginModel passwordLogin = new();
+    private OtpModel otpLogin = new();
+    private ResetPasswordModel resetPasswordModel = new();
+
+    private void SwitchMode(string mode)
+    {
+        loginMode = mode;
+        errorMessage = "";
+        otpSent = false;
+    }
+
+    private async Task LoginWithPassword()
+    {
+        errorMessage = "";
+        try
+        {
+            var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/login",
+                new { email = passwordLogin.Email, password = passwordLogin.Password });
+
+            var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (content.Message.Contains("reset your password"))
+                {
+                    isResetMode = true;
+                    resetPasswordModel.Email = passwordLogin.Email;
+
+                    // Automatically send OTP for first-time login
+                    await Http.PostAsJsonAsync("https://localhost:7286/api/user/send-otp",
+                        new { email = passwordLogin.Email });
+                }
+                else
+                {
+                    var authProvider = (CustomAuthStateProvider)AuthStateProvider;
+                    await authProvider.LoginAsync(passwordLogin.Email, "User");
+                    Navigation.NavigateTo("/user/dashboard");
+                }
+            }
+            else
+            {
+                errorMessage = content?.Message ?? "Invalid credentials or account not approved";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Login failed: {ex.Message}";
+        }
+    }
+
+    private async Task SendOtp()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/send-otp",
+                new { email = otpLogin.Email });
+
+            if (response.IsSuccessStatusCode)
+            {
+                otpSent = true;
+            }
+            else
+            {
+                errorMessage = "Email not found or not approved";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to send OTP: {ex.Message}";
+        }
+    }
+
+    private async Task LoginWithOtp()
+    {
+        errorMessage = "";
+        try
+        {
+            var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/login-otp",
+                new { email = otpLogin.Email, otp = otpLogin.Otp });
+
+            var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (content.Message.Contains("reset your password"))
+                {
+                    isResetMode = true;
+                    resetPasswordModel.Email = otpLogin.Email;
+                }
+                else
+                {
+                    var authProvider = (CustomAuthStateProvider)AuthStateProvider;
+                    await authProvider.LoginAsync(otpLogin.Email, "User");
+                    Navigation.NavigateTo("/user/dashboard");
+                }
+            }
+            else
+            {
+                errorMessage = content?.Message ?? "Invalid or expired OTP";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"OTP verification failed: {ex.Message}";
+        }
+    }
+
+    private async Task ResetPassword()
+    {
+        errorMessage = "";
+        try
+        {
+            var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/reset-password",
+                new { email = resetPasswordModel.Email, otp = resetPasswordModel.Otp, newPassword = resetPasswordModel.NewPassword });
+
+            if (response.IsSuccessStatusCode)
+            {
+                var authProvider = (CustomAuthStateProvider)AuthStateProvider;
+                await authProvider.LoginAsync(resetPasswordModel.Email, "User");
+                Navigation.NavigateTo("/user/dashboard");
+            }
+            else
+            {
+                var msg = await response.Content.ReadAsStringAsync();
+                errorMessage = $"Failed to reset password: {msg}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Reset failed: {ex.Message}";
+        }
+    }
+
+    // Models
+    public class LoginModel
+    {
+        [Required, EmailAddress] public string Email { get; set; } = string.Empty;
+        [Required] public string Password { get; set; } = string.Empty;
+    }
+
+    public class OtpModel
+    {
+        [Required, EmailAddress] public string Email { get; set; } = string.Empty;
+        [Required] public string Otp { get; set; } = string.Empty;
+    }
+
+    public class ResetPasswordModel
+    {
+        public string Email { get; set; } = string.Empty;
+        [Required] public string Otp { get; set; } = string.Empty;
+        [Required] public string NewPassword { get; set; } = string.Empty;
+    }
+
+    public class LoginResponse
+    {
+        public string Message { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+    }
+}
