@@ -1,0 +1,54 @@
+﻿@page "/register"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<h3 class="text-center mb-3">User Registration</h3>
+
+<div class="card p-4 shadow-lg rounded mx-auto" style="max-width:400px">
+    <input @bind="user.Email" placeholder="Email" class="form-control mb-2" />
+    <input @bind="user.Password" type="password" placeholder="Password" class="form-control mb-2" />
+    <input @bind="user.Name" placeholder="Full Name" class="form-control mb-2" />
+    <input @bind="user.Phone" placeholder="Phone Number" class="form-control mb-2" />
+    <input @bind="user.Specialty" placeholder="Specialty" class="form-control mb-2" />
+    <input @bind="user.Territory" placeholder="Territory" class="form-control mb-2" />
+    <input @bind="user.PreferredLanguage" placeholder="Preferred Language" class="form-control mb-3" />
+
+    <button class="btn btn-success w-100" @onclick="RegisterUser">Register</button>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <p class="text-info text-center mt-2">@message</p>
+    }
+</div>
+
+@code {
+    UserRegistration user = new();
+    string message = "";
+
+    private async Task RegisterUser()
+    {
+        var response = await Http.PostAsJsonAsync("api/user/register", user);
+
+        if (response.IsSuccessStatusCode)
+        {
+            message = "Registration successful! Wait for admin approval.";
+            await Task.Delay(2000);
+            Nav.NavigateTo("/user-login");
+        }
+        else
+        {
+            message = "Error registering user.";
+        }
+    }
+
+    public class UserRegistration
+    {
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Phone { get; set; } = "";
+        public string Specialty { get; set; } = "";
+        public string Territory { get; set; } = "";
+        public string PreferredLanguage { get; set; } = "";
+    }
+}
