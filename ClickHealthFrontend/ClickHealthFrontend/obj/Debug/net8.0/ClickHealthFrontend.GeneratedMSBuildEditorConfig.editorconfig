@@ -32,16 +32,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XExvZ2luTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/AdminApprovals.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5BcHByb3ZhbHMucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/AdminLogin.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5Mb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/Admin/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/Admin/UserApproval.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlckFwcHJvdmFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/Component.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcG9uZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/Home.razor]
@@ -58,10 +62,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/UserDashboard.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlckRhc2hib2FyZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/_Imports.razor]

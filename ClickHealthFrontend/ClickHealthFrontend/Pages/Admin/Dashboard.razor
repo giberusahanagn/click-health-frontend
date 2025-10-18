@@ -1,0 +1,106 @@
+﻿@page "/admin/dashboard"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
+@inject HttpClient Http
+
+<h2 class="text-3xl font-semibold mb-6">Admin Dashboard</h2>
+
+@if (summary == null)
+{
+    <p>Loading dashboard data...</p>
+}
+else
+{
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+            <h3 class="text-lg font-semibold text-gray-700">Total Users</h3>
+            <p class="text-3xl font-bold text-blue-600">@summary.TotalUsers</p>
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+            <h3 class="text-lg font-semibold text-gray-700">Pending Approvals</h3>
+            <p class="text-3xl font-bold text-yellow-600">@summary.PendingApprovals</p>
+            <a class="text-blue-500 underline text-sm mt-2 inline-block" href="/admin/approvals">View Approvals</a>
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+            <h3 class="text-lg font-semibold text-gray-700">Active Doctors</h3>
+            <p class="text-3xl font-bold text-green-600">@summary.ActiveDoctors</p>
+        </div>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">Recent Registrations</h3>
+
+        @if (summary.RecentUsers == null || !summary.RecentUsers.Any())
+        {
+            <p>No recent users found.</p>
+        }
+        else
+        {
+            <table class="table-auto w-full border-collapse border border-gray-200">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border px-4 py-2 text-left">Name</th>
+                        <th class="border px-4 py-2 text-left">Email</th>
+                        <th class="border px-4 py-2 text-left">Role</th>
+                        <th class="border px-4 py-2 text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in summary.RecentUsers)
+                    {
+                        <tr>
+                            <td class="border px-4 py-2">@user.Name</td>
+                            <td class="border px-4 py-2">@user.Email</td>
+                            <td class="border px-4 py-2">@user.Role</td>
+                            <td class="border px-4 py-2">
+                                @if (user.IsApproved)
+                                {
+                                    <span class="text-green-600 font-semibold">Approved</span>
+                                }
+                                else
+                                {
+                                    <span class="text-yellow-600 font-semibold">Pending</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}
+
+@code {
+    private AdminDashboardSummary? summary;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Example API endpoint – you can adjust it to your backend route
+            summary = await Http.GetFromJsonAsync<AdminDashboardSummary>("https://localhost:7286/api/admin/dashboard-summary");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching dashboard data: {ex.Message}");
+        }
+    }
+
+    public class AdminDashboardSummary
+    {
+        public int TotalUsers { get; set; }
+        public int PendingApprovals { get; set; }
+        public int ActiveDoctors { get; set; }
+        public List<UserSummary> RecentUsers { get; set; } = new();
+    }
+
+    public class UserSummary
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+        public bool IsApproved { get; set; }
+    }
+}

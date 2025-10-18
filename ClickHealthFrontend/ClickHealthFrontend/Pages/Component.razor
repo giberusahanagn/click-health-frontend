@@ -1,0 +1,24 @@
+﻿@page "/admin-dashboard"
+@inject NavigationManager Navigation
+
+<h3 class="text-center mb-4">Welcome, Admin 🎉</h3>
+
+<div class="text-center">
+    <p>You are logged in as an administrator.</p>
+
+    <button class="btn btn-primary mx-2" @onclick="@(() => Navigation.NavigateTo("/user-approval"))">
+        Manage User Approvals
+    </button>
+
+    <button class="btn btn-secondary mx-2" @onclick="@Logout">
+        Logout
+    </button>
+</div>
+
+@code {
+    void Logout()
+    {
+        // Later we’ll clear token/session here
+        Navigation.NavigateTo("/admin-login", true);
+    }
+}

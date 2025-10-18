@@ -9,7 +9,7 @@
     <ItemGroup>
       <Content Remove="wwwroot\css\app.css" />
     </ItemGroup>
-
+ 
     <ItemGroup>
       <None Include="wwwroot\css\app.css" />
     </ItemGroup>
