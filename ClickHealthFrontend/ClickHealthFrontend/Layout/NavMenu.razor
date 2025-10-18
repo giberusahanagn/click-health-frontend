@@ -1,6 +1,10 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">ClickHealth-Client</a>
+        <a class="navbar-brand" href="/">ClickHealth-Client</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,35 +13,78 @@
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-            <NavLink href="/user-login" class="nav-link">User Login</NavLink>
-            <NavLink href="/register" class="nav-link">Register</NavLink>
-            <NavLink href="/admin-login" class="nav-link">Admin Login</NavLink>
+        @if (isAuthenticated)
+        {
+            <div class="nav-item px-3">
+                <NavLink href="/" class="nav-link" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                </NavLink>
+            </div>
 
-        </div>
+            @if (userRole == "Admin")
+            {
+                <div class="nav-item px-3">
+                    <NavLink href="/admin/dashboard" class="nav-link">Dashboard</NavLink>
+                    <NavLink href="/admin/approvals" class="nav-link">User Approvals</NavLink>
+                </div>
+            }
+            else if (userRole == "Doctor" || userRole == "Patient")
+            {
+                <div class="nav-item px-3">
+                    <NavLink href="/user/dashboard" class="nav-link">Dashboard</NavLink>
+                    <NavLink href="/user/profile" class="nav-link">Profile</NavLink>
+                </div>
+            }
+
+            <div class="nav-item px-3">
+                <a href="#" class="nav-link" @onclick="Logout">Logout</a>
+            </div>
+        }
+        else
+        {
+            <div class="nav-item px-3">
+                <NavLink href="/user-login" class="nav-link">User Login</NavLink>
+                <NavLink href="/register" class="nav-link">Register</NavLink>
+                <NavLink href="/admin-login" class="nav-link">Admin Login</NavLink>
+            </div>
+        }
     </nav>
 </div>
 
 @code {
     private bool collapseNavMenu = true;
+    private bool isAuthenticated = false;
+    private string userRole = "";
+    private string userEmail = "";
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        isAuthenticated = user.Identity?.IsAuthenticated ?? false;
+
+        if (isAuthenticated)
+        {
+            userEmail = user.FindFirst(c => c.Type == "email")?.Value ?? "";
+            userRole = user.FindFirst(c => c.Type == "role")?.Value ?? "";
+        }
+    }
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task Logout()
+    {
+        if (AuthStateProvider is CustomAuthStateProvider authProvider)
+        {
+            await authProvider.LogoutAsync();
+        }
+
+        Navigation.NavigateTo("/login", forceLoad: true);
     }
 }

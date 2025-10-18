@@ -128,7 +128,7 @@
 
             var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
 
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && content != null)
             {
                 if (content.Message.Contains("reset your password"))
                 {
@@ -142,7 +142,8 @@
                 else
                 {
                     var authProvider = (CustomAuthStateProvider)AuthStateProvider;
-                    await authProvider.LoginAsync(passwordLogin.Email, "User");
+                    // Backend returns Role as string now
+                    await authProvider.LoginAsync(content.Email, content.Role);
                     Navigation.NavigateTo("/user/dashboard");
                 }
             }
@@ -164,11 +165,8 @@
             var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/send-otp",
                 new { email = otpLogin.Email });
 
-            if (response.IsSuccessStatusCode)
-            {
-                otpSent = true;
-            }
-            else
+            otpSent = response.IsSuccessStatusCode;
+            if (!otpSent)
             {
                 errorMessage = "Email not found or not approved";
             }
@@ -189,7 +187,7 @@
 
             var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
 
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && content != null)
             {
                 if (content.Message.Contains("reset your password"))
                 {
@@ -199,7 +197,7 @@
                 else
                 {
                     var authProvider = (CustomAuthStateProvider)AuthStateProvider;
-                    await authProvider.LoginAsync(otpLogin.Email, "User");
+                    await authProvider.LoginAsync(content.Email, content.Role);
                     Navigation.NavigateTo("/user/dashboard");
                 }
             }
@@ -264,6 +262,6 @@
     {
         public string Message { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty; // <-- MUST be string now to match backend
     }
 }

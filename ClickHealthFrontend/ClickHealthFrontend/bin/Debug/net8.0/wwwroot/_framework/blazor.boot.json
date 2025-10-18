@@ -1,15 +1,15 @@
 {
   "mainAssemblyName": "ClickHealthFrontend",
   "resources": {
-    "hash": "sha256-c/xXi6JnYQzaNAwrPGCfo7VNqBMS3FlNKtHD6R3dNsM=",
+    "hash": "sha256-vbm1BQ9MnMjWZwQ7yO2ggNkSU6L9cwug/PIem2OELvo=",
     "jsModuleNative": {
-      "dotnet.native.js": "sha256-D0bzod5lwwSzPR43JC8TTCcZKw+3jIHOk8CZFCRj5is="
+      "dotnet.native.js": "sha256-9Fzd5We95Rp03dEKIAbYjPDR3eWyLbmjMlYStvxyiok="
     },
     "jsModuleRuntime": {
-      "dotnet.runtime.js": "sha256-OH8zlJkheyf8H9oAbu0wu1oQm9FKy/BKjDk4Bj/va3s="
+      "dotnet.runtime.js": "sha256-aLf0XK8bqX83FXyXydFPTC1FOTq3PaeGDyoDn3uz194="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-1FiXHTP4dewtkVEvJ/s93FNwgKHgjajc/MAN3sofq6Q="
+      "dotnet.native.wasm": "sha256-Y1pDEFNAqpzUmFk5FuVUzruqNloBnByUMhlQ96dqto4="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -211,10 +211,10 @@
       "mscorlib.wasm": "sha256-MZJ1V6miMP318lQowft4FPkcszcibPLDTwKj235fSAc=",
       "netstandard.wasm": "sha256-RYAURbR1AHkUZYjKgu+B/i3N3VP4abnAaH+vxwJ8d3c=",
       "System.Private.CoreLib.wasm": "sha256-4YzdATaWUDkUkRpe+hl+T61TaCjRVapVUtqTIai3Gd8=",
-      "ClickHealthFrontend.wasm": "sha256-kg/hOclPmkyTYPpHKPKJ/7ZAMUMIR+UGvdGwCuDvJ1w="
+      "ClickHealthFrontend.wasm": "sha256-4xpLblk1ul2MmXiiz+bz11AEqyRPeIt5FDAmslhwlWs="
     },
     "pdb": {
-      "ClickHealthFrontend.pdb": "sha256-ZvciWEyJg9vVz7U3kkFUQAys3HZvSXFlhOa2LacVjwI="
+      "ClickHealthFrontend.pdb": "sha256-NISbjTBCsnP2YBZ2gfQI0Sp+i62kM2LusWBUt4PI9Eo="
     }
   },
   "cacheBootResources": true,
