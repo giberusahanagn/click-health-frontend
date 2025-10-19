@@ -1,68 +1,68 @@
 ﻿@page "/admin/approvals"
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.JSInterop
+@using System.Net.Http.Json
 @attribute [Authorize(Roles = "Admin")]
 @inject HttpClient Http
-@inject IJSRuntime JS
 
-<div class="p-6 bg-gray-100 min-h-screen">
-    <h3 class="text-3xl font-bold mb-6 text-gray-800">Pending User Approvals</h3>
+<div class="p-8 bg-gray-100 min-h-screen">
+    <h2 class="text-4xl font-bold mb-8 text-gray-800">Pending User Approvals</h2>
 
     @if (!string.IsNullOrEmpty(statusMessage))
     {
-        <div class="mb-4 p-3 rounded text-white" style="background-color:@statusColor">
+        <div class="mb-6 p-4 rounded-lg text-white font-medium transition-all duration-300" style="background-color:@statusColor">
             @statusMessage
         </div>
     }
 
     @if (pendingUsers == null)
     {
-        <p class="text-gray-500">Loading...</p>
+        <div class="text-gray-500 text-lg">Loading pending users...</div>
     }
     else if (!pendingUsers.Any())
     {
-        <p class="text-gray-500">No pending users.</p>
+        <div class="text-gray-500 text-lg">No pending users at the moment ✅</div>
     }
     else
     {
-        <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+        <div class="overflow-x-auto shadow-lg rounded-2xl bg-white">
+            <table class="min-w-full text-sm text-left text-gray-700">
+                <thead class="bg-gray-50 text-xs uppercase text-gray-500 border-b">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Specialty</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Territory</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preferred Language</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3">Name</th>
+                        <th class="px-6 py-3">Email</th>
+                        <th class="px-6 py-3">Role</th>
+                        <th class="px-6 py-3">Phone</th>
+                        <th class="px-6 py-3">Specialty</th>
+                        <th class="px-6 py-3">Territory</th>
+                        <th class="px-6 py-3">Preferred Language</th>
+                        <th class="px-6 py-3 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody>
                     @foreach (var user in pendingUsers)
                     {
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700">@user.Email</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700">@user.Name</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700 font-medium">
-                                <select @bind="user.Role" class="border rounded px-2 py-1 text-sm">
+                        <tr class="hover:bg-gray-50 border-b transition-all">
+                            <td class="px-6 py-4 font-medium text-gray-800">@user.Name</td>
+                            <td class="px-6 py-4">@user.Email</td>
+                            <td class="px-6 py-4">
+                                <select @bind="user.Role"
+                                        class="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
                                     @foreach (var role in roles)
                                     {
                                         <option value="@role">@role</option>
                                     }
                                 </select>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700">@user.Phone</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700">@user.Specialty</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700">@user.Territory</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-700">@user.PreferredLanguage</td>
-                            <td class="px-6 py-4 whitespace-nowrap space-x-2">
-                                <button class="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700 transition"
+                            <td class="px-6 py-4">@user.Phone</td>
+                            <td class="px-6 py-4">@user.Specialty</td>
+                            <td class="px-6 py-4">@user.Territory</td>
+                            <td class="px-6 py-4">@user.PreferredLanguage</td>
+                            <td class="px-6 py-4 text-center space-x-3">
+                                <button class="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition"
                                         @onclick="() => ApproveUser(user)">
                                     Approve
                                 </button>
-                                <button class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition"
+                                <button class="bg-red-600 text-white px-4 py-1 rounded-lg hover:bg-red-700 transition"
                                         @onclick="() => RejectUser(user.Email)">
                                     Reject
                                 </button>
@@ -77,39 +77,66 @@
 
 @code {
     private List<UserDto>? pendingUsers;
-    private string statusMessage = "";
+    private List<string> roles = new();
+    private string statusMessage = string.Empty;
     private string statusColor = "green";
-
-    // Define roles locally
-    private List<string> roles = new() { "Marketing_Team", "Sales_Team", "Support_Team" };
 
     protected override async Task OnInitializedAsync()
     {
-        pendingUsers = await Http.GetFromJsonAsync<List<UserDto>>("https://localhost:7286/api/admin/pending-users");
+        await LoadPendingUsersAsync();
+        await LoadRolesAsync();
+    }
+
+    private async Task LoadPendingUsersAsync()
+    {
+        try
+        {
+            pendingUsers = await Http.GetFromJsonAsync<List<UserDto>>("https://localhost:7286/api/admin/pending-users");
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error loading pending users: {ex.Message}";
+            statusColor = "#dc2626";
+        }
+    }
+
+    private async Task LoadRolesAsync()
+    {
+        try
+        {
+            roles = await Http.GetFromJsonAsync<List<string>>("https://localhost:7286/api/admin/roles") ?? new();
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error loading roles: {ex.Message}";
+            statusColor = "#dc2626";
+        }
     }
 
     private async Task ApproveUser(UserDto user)
     {
         try
         {
-            var response = await Http.PostAsJsonAsync($"https://localhost:7286/api/admin/approve-user/{user.Email}", new { role = user.Role });
+            // Send raw string to match backend expectation
+            var response = await Http.PostAsJsonAsync($"https://localhost:7286/api/admin/approve-user/{user.Email}", user.Role);
+
             if (response.IsSuccessStatusCode)
             {
-                pendingUsers = pendingUsers?.Where(u => u.Email != user.Email).ToList();
-                statusMessage = $"User {user.Email} approved and email sent!";
-                statusColor = "green";
+                pendingUsers?.RemoveAll(u => u.Email == user.Email);
+                statusMessage = $"✅ User {user.Email} approved successfully. Email sent!";
+                statusColor = "#16a34a";
             }
             else
             {
-                var msg = await response.Content.ReadAsStringAsync();
-                statusMessage = $"Failed to approve: {msg}";
-                statusColor = "red";
+                var error = await response.Content.ReadAsStringAsync();
+                statusMessage = $"❌ Failed to approve user: {error}";
+                statusColor = "#dc2626";
             }
         }
         catch (Exception ex)
         {
-            statusMessage = $"Error: {ex.Message}";
-            statusColor = "red";
+            statusMessage = $"⚠️ Error approving user: {ex.Message}";
+            statusColor = "#dc2626";
         }
     }
 
@@ -117,24 +144,25 @@
     {
         try
         {
-            var response = await Http.PostAsJsonAsync($"https://localhost:7286/api/admin/reject-user/{email}", new { reason = "Rejected by admin" });
+            var response = await Http.PostAsJsonAsync($"https://localhost:7286/api/admin/reject-user/{email}", "Rejected by admin");
+
             if (response.IsSuccessStatusCode)
             {
-                pendingUsers = pendingUsers?.Where(u => u.Email != email).ToList();
-                statusMessage = $"User {email} rejected and email sent!";
-                statusColor = "red";
+                pendingUsers?.RemoveAll(u => u.Email == email);
+                statusMessage = $"🚫 User {email} rejected and notified by email.";
+                statusColor = "#dc2626";
             }
             else
             {
-                var msg = await response.Content.ReadAsStringAsync();
-                statusMessage = $"Failed to reject: {msg}";
-                statusColor = "red";
+                var error = await response.Content.ReadAsStringAsync();
+                statusMessage = $"❌ Failed to reject user: {error}";
+                statusColor = "#dc2626";
             }
         }
         catch (Exception ex)
         {
-            statusMessage = $"Error: {ex.Message}";
-            statusColor = "red";
+            statusMessage = $"⚠️ Error rejecting user: {ex.Message}";
+            statusColor = "#dc2626";
         }
     }
 
