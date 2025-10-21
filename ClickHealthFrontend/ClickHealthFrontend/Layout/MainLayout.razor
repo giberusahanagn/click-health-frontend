@@ -18,11 +18,19 @@
                     <li><a href="/admin/users">All Users</a></li>
                     <li><a href="/admin/settings">Settings</a></li>
                 }
+                else if (userRole == "Medical_Team")
+                {
+                    <li><a href="/medical/dashboard">Dashboard</a></li>
+                    <li><a href="/medical/content-upload">Upload Content</a></li>
+                    <!-- Optional: add workflow page if you have it -->
+                    <!-- <li><a href="/medical/content-workflow">Workflow</a></li> -->
+                }
                 else if (userRole == "Doctor" || userRole == "Patient")
                 {
                     <li><a href="/user/dashboard">Dashboard</a></li>
                     <li><a href="/user/profile">Profile</a></li>
                 }
+
                 <li><a href="#" @onclick="Logout" @onclick:preventDefault>Logout</a></li>
             </ul>
         </nav>
@@ -44,7 +52,7 @@
 @code {
     private string userEmail = "";
     private string userRole = "";
-    private ClaimsPrincipal user;
+    private ClaimsPrincipal user = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -60,8 +68,11 @@
 
     private async Task Logout()
     {
-        var authProvider = (CustomAuthStateProvider)AuthStateProvider;
-        await authProvider.LogoutAsync();
+        if (AuthStateProvider is CustomAuthStateProvider authProvider)
+        {
+            await authProvider.LogoutAsync();
+        }
+
         Navigation.NavigateTo("/login", forceLoad: true);
     }
 }

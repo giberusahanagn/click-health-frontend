@@ -12,13 +12,19 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // HttpClient for API calls to backend
-builder.Services.AddScoped(sp => new HttpClient
+builder.Services.AddScoped(sp =>
 {
-    BaseAddress = new Uri("https://localhost:7286") // Your backend URL
+    var client = new HttpClient
+    {
+        BaseAddress = new Uri("https://localhost:7286") // Backend URL
+    };
+
+    // Optional: default headers
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    return client;
 });
 
-
-// Authentication
+// Authentication and Authorization
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddAuthorizationCore();
 

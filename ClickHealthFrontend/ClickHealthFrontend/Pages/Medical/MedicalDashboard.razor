@@ -1,0 +1,71 @@
+﻿@page "/medical/dashboard"
+@inject HttpClient Http
+
+<h3 class="text-2xl font-semibold mb-4">Medical Content Dashboard</h3>
+
+@if (approvedContents == null || pendingContents == null || rejectedContents == null)
+{
+    <p>Loading content...</p>
+}
+else
+{
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 bg-green-100 rounded-lg shadow">
+            <h4 class="font-semibold text-green-800">Approved</h4>
+            <p class="text-3xl font-bold">@approvedContents.Count</p>
+        </div>
+        <div class="p-4 bg-yellow-100 rounded-lg shadow">
+            <h4 class="font-semibold text-yellow-800">Pending Approval</h4>
+            <p class="text-3xl font-bold">@pendingContents.Count</p>
+        </div>
+        <div class="p-4 bg-red-100 rounded-lg shadow">
+            <h4 class="font-semibold text-red-800">Rejected</h4>
+            <p class="text-3xl font-bold">@rejectedContents.Count</p>
+        </div>
+    </div>
+
+    <!-- Pending Contents Table -->
+    <h4 class="text-lg font-semibold text-gray-700 mt-4">Pending Contents</h4>
+    <ContentTable Items="@pendingContents" IsPending="true"
+                  OnApprove="ApproveContent" OnReject="RejectContent" />
+
+    <!-- Approved Contents Table -->
+    <h4 class="text-lg font-semibold text-green-700 mt-6">Approved Contents</h4>
+    <ContentTable Items="@approvedContents" />
+
+    <!-- Rejected Contents Table -->
+    <h4 class="text-lg font-semibold text-red-700 mt-6">Rejected Contents</h4>
+    <ContentTable Items="@rejectedContents" />
+}
+
+@code {
+    private List<ContentTable.ContentDto>? approvedContents;
+    private List<ContentTable.ContentDto>? pendingContents;
+    private List<ContentTable.ContentDto>? rejectedContents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadContents();
+    }
+
+    private async Task LoadContents()
+    {
+        approvedContents = await Http.GetFromJsonAsync<List<ContentTable.ContentDto>>("api/Content/approved") ?? new();
+        pendingContents = await Http.GetFromJsonAsync<List<ContentTable.ContentDto>>("api/Content/pending") ?? new();
+        rejectedContents = await Http.GetFromJsonAsync<List<ContentTable.ContentDto>>("api/Content/rejected") ?? new();
+        StateHasChanged();
+    }
+
+    private async Task ApproveContent(string contentId)
+    {
+        await Http.PutAsync($"api/Content/update-status/{contentId}?newStatus=Approved", null);
+        await LoadContents();
+    }
+                
+    private async Task RejectContent(string contentId)
+    {
+        await Http.PutAsync($"api/Content/update-status/{contentId}?newStatus=Rejected", null);
+        await LoadContents();
+    }
+}

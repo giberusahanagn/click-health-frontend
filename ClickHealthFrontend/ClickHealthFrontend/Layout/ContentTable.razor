@@ -1,0 +1,178 @@
+﻿<h1 class="text-2xl font-bold mb-4">Medical Content Dashboard</h1>
+
+<div class="mb-6">
+    <div>Approved: @ApprovedContents.Count</div>
+    <div>Pending Approval: @PendingContents.Count</div>
+    <div>Rejected: @RejectedContents.Count</div>
+</div>
+
+@if (PendingContents.Any())
+{
+    <h2 class="text-xl font-semibold mt-4">Pending Contents</h2>
+    <table class="min-w-full border rounded-lg overflow-hidden shadow mb-6">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 text-left">Medical Name</th>
+                <th class="px-4 py-2 text-left">Language</th>
+                <th class="px-4 py-2 text-left">Description</th>
+                <th class="px-4 py-2 text-left">View PDF</th>
+                <th class="px-4 py-2 text-left">View Video</th>
+                <th class="px-4 py-2 text-left">End Date</th>
+                <th class="px-4 py-2 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in PendingContents)
+            {
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Title) ? item.Title : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Language) ? item.Language : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(item.PdfUrl))
+                        {
+                            <a href="@item.PdfUrl" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">N/A</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        {
+                            <a href="@item.VideoUrl" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">N/A</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                    <td class="px-4 py-2 space-x-2">
+                        <button class="bg-green-500 text-white px-2 py-1 rounded" @onclick="@(() => OnApprove.InvokeAsync(item.ContentId))">Approve</button>
+                        <button class="bg-red-500 text-white px-2 py-1 rounded" @onclick="@(() => OnReject.InvokeAsync(item.ContentId))">Reject</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (ApprovedContents.Any())
+{
+    <h2 class="text-xl font-semibold mt-4">Approved Contents</h2>
+    <table class="min-w-full border rounded-lg overflow-hidden shadow mb-6">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 text-left">Medical Name</th>
+                <th class="px-4 py-2 text-left">Language</th>
+                <th class="px-4 py-2 text-left">Description</th>
+                <th class="px-4 py-2 text-left">View PDF</th>
+                <th class="px-4 py-2 text-left">View Video</th>
+                <th class="px-4 py-2 text-left">End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ApprovedContents)
+            {
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Title) ? item.Title : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Language) ? item.Language : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(item.PdfUrl))
+                        {
+                            <a href="@item.PdfUrl" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">N/A</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        {
+                            <a href="@item.VideoUrl" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">N/A</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (RejectedContents.Any())
+{
+    <h2 class="text-xl font-semibold mt-4">Rejected Contents</h2>
+    <table class="min-w-full border rounded-lg overflow-hidden shadow mb-6">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 text-left">Medical Name</th>
+                <th class="px-4 py-2 text-left">Language</th>
+                <th class="px-4 py-2 text-left">Description</th>
+                <th class="px-4 py-2 text-left">View PDF</th>
+                <th class="px-4 py-2 text-left">View Video</th>
+                <th class="px-4 py-2 text-left">End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in RejectedContents)
+            {
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Title) ? item.Title : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Language) ? item.Language : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(item.PdfUrl))
+                        {
+                            <a href="@item.PdfUrl" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">N/A</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">
+                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        {
+                            <a href="@item.VideoUrl" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">N/A</span>
+                        }
+                    </td>
+                    <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] public List<ContentDto> Items { get; set; } = new();
+    [Parameter] public EventCallback<string> OnApprove { get; set; }
+    [Parameter] public EventCallback<string> OnReject { get; set; }
+
+    private List<ContentDto> PendingContents => Items.Where(i => i.Status == "Pending").ToList();
+    private List<ContentDto> ApprovedContents => Items.Where(i => i.Status == "Approved").ToList();
+    private List<ContentDto> RejectedContents => Items.Where(i => i.Status == "Rejected").ToList();
+
+    public class ContentDto
+    {
+        public string ContentId { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string Language { get; set; } = "";
+        public string Description { get; set; } = "";
+        public DateTime? EndDate { get; set; }
+        public string PdfUrl { get; set; } = "";
+        public string VideoUrl { get; set; } = "";
+        public string Status { get; set; } = "Pending"; // "Pending", "Approved", "Rejected"
+    }
+}

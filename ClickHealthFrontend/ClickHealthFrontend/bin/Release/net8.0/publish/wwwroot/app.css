@@ -1,0 +1,722 @@
+﻿/* ===================================
+   GLOBAL STYLES
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+}
+
+/* ===================================
+   PAGE LAYOUT
+   =================================== */
+.page {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ===================================
+   SIDEBAR NAVIGATION
+   =================================== */
+.sidebar {
+    width: 250px;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+.navbar {
+    padding: 20px;
+}
+
+.navbar-header {
+    margin-bottom: 30px;
+    padding: 0 0 20px 0;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+    .navbar-header h3 {
+        color: #667eea;
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .nav-menu li {
+        margin-bottom: 10px;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 12px 16px;
+        color: #333;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-weight: 500;
+        border-left: 3px solid transparent;
+    }
+
+        .nav-menu a:hover {
+            background: #f0f0f0;
+            color: #667eea;
+            border-left-color: #667eea;
+        }
+
+/* ===================================
+   MAIN CONTENT AREA
+   =================================== */
+.main-content {
+    margin-left: 250px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 250px);
+}
+
+/* ===================================
+   TOP NAVBAR / HEADER
+   =================================== */
+.top-navbar {
+    background: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 70px;
+    z-index: 50;
+}
+
+.user-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+    .user-info span:first-child {
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+.role-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===================================
+   MAIN CONTENT AREA
+   =================================== */
+main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+/* ===================================
+   LOGIN & REGISTER PAGES
+   =================================== */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.login-container,
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.login-box,
+.register-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-box h2,
+.register-box h2 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* ===================================
+   TABS
+   =================================== */
+.tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.tab {
+    flex: 1;
+    padding: 12px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+    .tab:hover {
+        color: #667eea;
+    }
+
+    .tab.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+    }
+
+/* ===================================
+   FORM STYLES
+   =================================== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+        .form-group input::placeholder,
+        .form-group select::placeholder {
+            color: #999;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input:disabled,
+        .form-group select:disabled {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+/* ===================================
+   BUTTONS
+   =================================== */
+.btn-primary,
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    text-transform: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+}
+
+    .btn-secondary:hover {
+        background: #e0e0e0;
+    }
+
+/* ===================================
+   ADMIN TABLE & BUTTONS
+   =================================== */
+.admin-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .admin-container h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+    .admin-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .admin-table th {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #f0f0f0;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .admin-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 14px;
+    }
+
+    .admin-table tbody tr:hover {
+        background: #f9f9f9;
+    }
+
+    .admin-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+.btn-approve,
+.btn-reject {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-approve {
+    background: #10b981;
+    color: white;
+}
+
+    .btn-approve:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(16, 185, 129, 0.3);
+    }
+
+.btn-reject {
+    background: #ef4444;
+    color: white;
+}
+
+    .btn-reject:hover {
+        background: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(239, 68, 68, 0.3);
+    }
+
+/* ===================================
+   ALERTS
+   =================================== */
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 4px solid;
+}
+
+.alert-error {
+    background: #fee;
+    color: #c33;
+    border-left-color: #c33;
+}
+
+.alert-success {
+    background: #efe;
+    color: #3c3;
+    border-left-color: #3c3;
+}
+
+.alert-warning {
+    background: #ffeaa7;
+    color: #d63031;
+    border-left-color: #d63031;
+}
+
+.alert-info {
+    background: #e3f2fd;
+    color: #1976d2;
+    border-left-color: #1976d2;
+}
+
+/* ===================================
+   POPUP MODAL
+   =================================== */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.popup {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup h3 {
+    color: #10b981;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.popup p {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* ===================================
+   LINKS
+   =================================== */
+.login-link,
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+    .login-link a,
+    .register-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+        .login-link a:hover,
+        .register-link a:hover {
+            text-decoration: underline;
+            color: #764ba2;
+        }
+
+/* ===================================
+   DASHBOARD
+   =================================== */
+.dashboard {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .dashboard h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .dashboard p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+/* ===================================
+   BLAZOR ERROR UI
+   =================================== */
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    right: 0;
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+        #blazor-error-ui .dismiss:hover {
+            color: #000;
+        }
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #764ba2;
+    }
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .navbar-header {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+        .nav-menu li {
+            margin: 0;
+            flex: 0 1 auto;
+        }
+
+        .nav-menu a {
+            padding: 10px 12px;
+            font-size: 13px;
+        }
+
+    .login-box,
+    .register-box {
+        padding: 30px 20px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .top-navbar {
+        padding: 10px 15px;
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+    }
+
+    .user-info {
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .admin-table {
+        font-size: 12px;
+    }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 10px;
+        }
+
+    .btn-approve,
+    .btn-reject {
+        padding: 6px 12px;
+        margin-right: 4px;
+        font-size: 11px;
+    }
+
+    .popup {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-header h3 {
+        font-size: 18px;
+    }
+
+    .login-box h2,
+    .register-box h2 {
+        font-size: 22px;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 16px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .admin-container {
+        padding: 15px;
+    }
+}

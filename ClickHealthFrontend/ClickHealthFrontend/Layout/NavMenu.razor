@@ -4,23 +4,23 @@
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">ClickHealth-Client</a>
+        <a class="navbar-brand" href="/">ClickHealth</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable">
     <nav class="flex-column">
         @if (isAuthenticated)
         {
+            <!-- Common Home link -->
             <div class="nav-item px-3">
-                <NavLink href="/" class="nav-link" Match="NavLinkMatch.All">
-                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-                </NavLink>
+                <NavLink href="/" class="nav-link" Match="NavLinkMatch.All">Home</NavLink>
             </div>
 
+            <!-- Admin Menu -->
             @if (userRole == "Admin")
             {
                 <div class="nav-item px-3">
@@ -28,6 +28,21 @@
                     <NavLink href="/admin/approvals" class="nav-link">User Approvals</NavLink>
                 </div>
             }
+
+            <!-- Medical Team Menu -->
+            else if (userRole == "Medical_Team")
+            {
+                <div class="nav-item px-3">
+                    <NavLink href="/medical/dashboard" class="nav-link">Dashboard</NavLink>
+                    <NavLink href="/medical/content-upload" class="nav-link">Upload Content</NavLink>
+                    <NavLink href="/medical/content-management" class="nav-link">Content Management</NavLink>
+                    <NavLink href="/medical/content-workflow" class="nav-link">Workflow</NavLink>
+
+                </div>
+            }
+
+
+            <!-- Doctor / Patient Menu -->
             else if (userRole == "Doctor" || userRole == "Patient")
             {
                 <div class="nav-item px-3">
@@ -36,14 +51,16 @@
                 </div>
             }
 
+            <!-- Logout -->
             <div class="nav-item px-3">
                 <a href="#" class="nav-link" @onclick="Logout">Logout</a>
             </div>
         }
         else
         {
+            <!-- Unauthenticated User Menu -->
             <div class="nav-item px-3">
-                <NavLink href="/user-login" class="nav-link">User Login</NavLink>
+                <NavLink href="/login" class="nav-link">Login</NavLink>
                 <NavLink href="/register" class="nav-link">Register</NavLink>
                 <NavLink href="/admin-login" class="nav-link">Admin Login</NavLink>
             </div>
@@ -85,6 +102,7 @@
             await authProvider.LogoutAsync();
         }
 
+        // Redirect to login after logout
         Navigation.NavigateTo("/login", forceLoad: true);
     }
 }

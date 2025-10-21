@@ -12,7 +12,6 @@
 
         @if (!isResetMode)
         {
-            <!-- Tabs for password / OTP -->
             <div class="tabs flex justify-center mb-4">
                 <button class="tab @(loginMode == "password" ? "active" : "")"
                         @onclick="@(() => SwitchMode("password"))">
@@ -68,7 +67,6 @@
         }
         else
         {
-            <!-- Reset password form -->
             <EditForm Model="resetPasswordModel" OnValidSubmit="ResetPassword">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -124,32 +122,39 @@
         try
         {
             var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/login",
-                new { email = passwordLogin.Email, password = passwordLogin.Password });
+                new { Email = passwordLogin.Email, Password = passwordLogin.Password });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var msg = await response.Content.ReadAsStringAsync();
+                errorMessage = !string.IsNullOrEmpty(msg) ? msg : "Login failed";
+                return;
+            }
 
             var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
-
-            if (response.IsSuccessStatusCode && content != null)
+            if (content != null)
             {
                 if (content.Message.Contains("reset your password"))
                 {
                     isResetMode = true;
                     resetPasswordModel.Email = passwordLogin.Email;
-
-                    // Automatically send OTP for first-time login
+                    otpSent = true;
                     await Http.PostAsJsonAsync("https://localhost:7286/api/user/send-otp",
-                        new { email = passwordLogin.Email });
+                        new { Email = passwordLogin.Email });
                 }
                 else
                 {
                     var authProvider = (CustomAuthStateProvider)AuthStateProvider;
-                    // Backend returns Role as string now
                     await authProvider.LoginAsync(content.Email, content.Role);
-                    Navigation.NavigateTo("/user/dashboard");
+
+                    // Redirect based on role
+                    if (content.Role == "Admin")
+                        Navigation.NavigateTo("/admin/dashboard");
+                    else if (content.Role == "Medical_Team")
+                        Navigation.NavigateTo("/medical/dashboard");
+                    else
+                        errorMessage = "Role not recognized";
                 }
-            }
-            else
-            {
-                errorMessage = content?.Message ?? "Invalid credentials or account not approved";
             }
         }
         catch (Exception ex)
@@ -160,15 +165,17 @@
 
     private async Task SendOtp()
     {
+        errorMessage = "";
         try
         {
             var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/send-otp",
-                new { email = otpLogin.Email });
+                new { Email = otpLogin.Email });
 
             otpSent = response.IsSuccessStatusCode;
             if (!otpSent)
             {
-                errorMessage = "Email not found or not approved";
+                var msg = await response.Content.ReadAsStringAsync();
+                errorMessage = !string.IsNullOrEmpty(msg) ? msg : "Email not found or not approved";
             }
         }
         catch (Exception ex)
@@ -183,11 +190,17 @@
         try
         {
             var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/login-otp",
-                new { email = otpLogin.Email, otp = otpLogin.Otp });
+                new { Email = otpLogin.Email, Otp = otpLogin.Otp });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var msg = await response.Content.ReadAsStringAsync();
+                errorMessage = !string.IsNullOrEmpty(msg) ? msg : "OTP login failed";
+                return;
+            }
 
             var content = await response.Content.ReadFromJsonAsync<LoginResponse>();
-
-            if (response.IsSuccessStatusCode && content != null)
+            if (content != null)
             {
                 if (content.Message.Contains("reset your password"))
                 {
@@ -198,12 +211,15 @@
                 {
                     var authProvider = (CustomAuthStateProvider)AuthStateProvider;
                     await authProvider.LoginAsync(content.Email, content.Role);
-                    Navigation.NavigateTo("/user/dashboard");
+
+                    // Redirect based on role
+                    if (content.Role == "Admin")
+                        Navigation.NavigateTo("/admin/dashboard");
+                    else if (content.Role == "MedicalTeam")
+                        Navigation.NavigateTo("/medical/dashboard");
+                    else
+                        errorMessage = "Role not recognized";
                 }
-            }
-            else
-            {
-                errorMessage = content?.Message ?? "Invalid or expired OTP";
             }
         }
         catch (Exception ex)
@@ -218,13 +234,18 @@
         try
         {
             var response = await Http.PostAsJsonAsync("https://localhost:7286/api/user/reset-password",
-                new { email = resetPasswordModel.Email, otp = resetPasswordModel.Otp, newPassword = resetPasswordModel.NewPassword });
+                new
+                {
+                    Email = resetPasswordModel.Email,
+                    Otp = resetPasswordModel.Otp,
+                    NewPassword = resetPasswordModel.NewPassword
+                });
 
             if (response.IsSuccessStatusCode)
             {
                 var authProvider = (CustomAuthStateProvider)AuthStateProvider;
-                await authProvider.LoginAsync(resetPasswordModel.Email, "User");
-                Navigation.NavigateTo("/user/dashboard");
+                await authProvider.LoginAsync(resetPasswordModel.Email, "MedicalTeam"); // default to MedicalTeam
+                Navigation.NavigateTo("/medical/dashboard");
             }
             else
             {
@@ -238,7 +259,6 @@
         }
     }
 
-    // Models
     public class LoginModel
     {
         [Required, EmailAddress] public string Email { get; set; } = string.Empty;
@@ -262,6 +282,6 @@
     {
         public string Message { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty; // <-- MUST be string now to match backend
+        public string Role { get; set; } = string.Empty;
     }
 }
