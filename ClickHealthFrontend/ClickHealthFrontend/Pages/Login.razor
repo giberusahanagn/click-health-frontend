@@ -139,6 +139,11 @@
                     isResetMode = true;
                     resetPasswordModel.Email = passwordLogin.Email;
                     otpSent = true;
+<<<<<<< HEAD
+=======
+
+                    // Send OTP automatically
+>>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
                     await Http.PostAsJsonAsync("https://localhost:7286/api/user/send-otp",
                         new { Email = passwordLogin.Email });
                 }
