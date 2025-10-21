@@ -1,71 +1,158 @@
 ﻿@page "/medical/dashboard"
-@inject HttpClient Http
+@using System.Net.Http.Json
 
-<h3 class="text-2xl font-semibold mb-4">Medical Content Dashboard</h3>
+<h1 class="text-2xl font-bold mb-4">Medical Content Dashboard</h1>
 
-@if (approvedContents == null || pendingContents == null || rejectedContents == null)
-{
-    <p>Loading content...</p>
-}
-else
-{
-    <!-- Summary Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="p-4 bg-green-100 rounded-lg shadow">
-            <h4 class="font-semibold text-green-800">Approved</h4>
-            <p class="text-3xl font-bold">@approvedContents.Count</p>
-        </div>
-        <div class="p-4 bg-yellow-100 rounded-lg shadow">
-            <h4 class="font-semibold text-yellow-800">Pending Approval</h4>
-            <p class="text-3xl font-bold">@pendingContents.Count</p>
-        </div>
-        <div class="p-4 bg-red-100 rounded-lg shadow">
-            <h4 class="font-semibold text-red-800">Rejected</h4>
-            <p class="text-3xl font-bold">@rejectedContents.Count</p>
-        </div>
+<div class="mb-6 grid grid-cols-3 gap-4 text-center">
+    <div class="bg-green-100 text-green-800 p-3 rounded-lg shadow">
+        <div class="text-lg font-semibold">Approved</div>
+        <div class="text-2xl font-bold">@ApprovedContents.Count</div>
     </div>
+    <div class="bg-yellow-100 text-yellow-800 p-3 rounded-lg shadow">
+        <div class="text-lg font-semibold">Pending Approval</div>
+        <div class="text-2xl font-bold">@PendingContents.Count</div>
+    </div>
+    <div class="bg-red-100 text-red-800 p-3 rounded-lg shadow">
+        <div class="text-lg font-semibold">Rejected</div>
+        <div class="text-2xl font-bold">@RejectedContents.Count</div>
+    </div>
+</div>
 
-    <!-- Pending Contents Table -->
-    <h4 class="text-lg font-semibold text-gray-700 mt-4">Pending Contents</h4>
-    <ContentTable Items="@pendingContents" IsPending="true"
-                  OnApprove="ApproveContent" OnReject="RejectContent" />
+@if (PendingContents.Any())
+{
+    <h2 class="text-xl font-semibold mt-6 mb-2">Pending Contents</h2>
+    @Table(PendingContents, showActions: true)
+}
 
-    <!-- Approved Contents Table -->
-    <h4 class="text-lg font-semibold text-green-700 mt-6">Approved Contents</h4>
-    <ContentTable Items="@approvedContents" />
+@if (ApprovedContents.Any())
+{
+    <h2 class="text-xl font-semibold mt-6 mb-2">Approved Contents</h2>
+    @Table(ApprovedContents)
+}
 
-    <!-- Rejected Contents Table -->
-    <h4 class="text-lg font-semibold text-red-700 mt-6">Rejected Contents</h4>
-    <ContentTable Items="@rejectedContents" />
+@if (RejectedContents.Any())
+{
+    <h2 class="text-xl font-semibold mt-6 mb-2">Rejected Contents</h2>
+    @Table(RejectedContents)
 }
 
 @code {
-    private List<ContentTable.ContentDto>? approvedContents;
-    private List<ContentTable.ContentDto>? pendingContents;
-    private List<ContentTable.ContentDto>? rejectedContents;
+    [Inject] public HttpClient Http { get; set; } = default!;
+
+    private List<ContentDto> Items { get; set; } = new();
+
+    private List<ContentDto> PendingContents => Items.Where(i => i.Status == "PendingApproval").ToList();
+    private List<ContentDto> ApprovedContents => Items.Where(i => i.Status == "Approved").ToList();
+    private List<ContentDto> RejectedContents => Items.Where(i => i.Status == "Rejected").ToList();
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadContents();
+        await LoadAllContents();
     }
 
-    private async Task LoadContents()
+    private async Task LoadAllContents()
     {
-        approvedContents = await Http.GetFromJsonAsync<List<ContentTable.ContentDto>>("api/Content/approved") ?? new();
-        pendingContents = await Http.GetFromJsonAsync<List<ContentTable.ContentDto>>("api/Content/pending") ?? new();
-        rejectedContents = await Http.GetFromJsonAsync<List<ContentTable.ContentDto>>("api/Content/rejected") ?? new();
-        StateHasChanged();
+        try
+        {
+            var approved = await Http.GetFromJsonAsync<List<ContentDto>>("api/content/approved") ?? new();
+            var pending = await Http.GetFromJsonAsync<List<ContentDto>>("api/content/pending") ?? new();
+            var rejected = await Http.GetFromJsonAsync<List<ContentDto>>("api/content/rejected") ?? new();
+
+            Items = approved.Concat(pending).Concat(rejected).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading content: {ex.Message}");
+        }
     }
 
     private async Task ApproveContent(string contentId)
     {
-        await Http.PutAsync($"api/Content/update-status/{contentId}?newStatus=Approved", null);
-        await LoadContents();
+        await Http.PutAsync($"api/content/update-status/{contentId}?newStatus=Approved", null);
+        await LoadAllContents();
     }
-                
+
     private async Task RejectContent(string contentId)
     {
-        await Http.PutAsync($"api/Content/update-status/{contentId}?newStatus=Rejected", null);
-        await LoadContents();
+        await Http.PutAsync($"api/content/update-status/{contentId}?newStatus=Rejected", null);
+        await LoadAllContents();
     }
+
+    private RenderFragment Table(List<ContentDto> list, bool showActions = false) => @<table class="min-w-full border rounded-lg overflow-hidden shadow mb-6">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="px-4 py-2 text-left">Medical Name</th>
+            <th class="px-4 py-2 text-left">Language</th>
+            <th class="px-4 py-2 text-left">Description</th>
+            <th class="px-4 py-2 text-left">View PDF</th>
+            <th class="px-4 py-2 text-left">View Video</th>
+            <th class="px-4 py-2 text-left">Uploaded By</th>
+            <th class="px-4 py-2 text-left">Expiry Date</th>
+            @if (showActions)
+                        {
+            <th class="px-4 py-2 text-left">Actions</th>
+                        }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in list)
+        {
+            <tr class="border-b hover:bg-gray-50">
+                <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Therapy) ? item.Therapy : "N/A")</td>
+                <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.ContentLanguage) ? item.ContentLanguage : "N/A")</td>
+                <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
+                <td class="px-4 py-2">
+                    @if (!string.IsNullOrEmpty(item.ViewPdf))
+                    {
+                        <a href="@item.ViewPdf" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                    }
+                    else
+                    {
+                        <span class="text-gray-400">N/A</span>
+                    }
+                </td>
+                <td class="px-4 py-2">
+                    @if (!string.IsNullOrEmpty(item.ViewVideo))
+                    {
+                        <a href="@item.ViewVideo" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                    }
+                    else
+                    {
+                        <span class="text-gray-400">N/A</span>
+                    }
+                </td>
+                <td class="px-4 py-2">@item.UploadedBy</td>
+                <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                @if (showActions)
+                {
+                    <td class="px-4 py-2 space-x-2">
+                        <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                                @onclick="() => ApproveContent(item.ContentId)">
+                            Approve
+                        </button>
+                        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                @onclick="() => RejectContent(item.ContentId)">
+                            Reject
+                        </button>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>;
+
+// ✅ Updated ContentDto
+public class ContentDto
+{
+    public string ContentId { get; set; } = "";
+    public string Therapy { get; set; } = ""; // Medical Name
+    public string ContentLanguage { get; set; } = "";
+    public string Description { get; set; } = "";
+    public string ViewPdf { get; set; } = "";
+    public string ViewVideo { get; set; } = "";
+    public string Status { get; set; } = "";
+    public string UploadedBy { get; set; } = "";
+    public string ApprovedBy { get; set; } = "";
+    public DateTime? EndDate { get; set; }
+}
 }

@@ -5,20 +5,13 @@
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
-<<<<<<< HEAD
-<!-- Use the narrow container design similar to the Login page (max-w-md) -->
+<!-- Container -->
 <div class="flex justify-center items-center min-h-screen bg-gray-100 px-4">
-    <!-- The card now uses the narrow 'max-w-md' size and clean shadow style -->
     <div class="login-box bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
         <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">Create Your Account</h2>
         <p class="text-center text-gray-500 text-sm mb-6">
             Join ClickHealth to get started.
         </p>
-=======
-<div class="register-container flex justify-center items-center min-h-screen bg-blue-600">
-    <div class="register-box bg-white p-10 rounded-2xl shadow-2xl w-full max-w-5xl">
-        <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">Create Your Account</h2>
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
 
         @if (!showApprovalPopup && !showEmailExistsPopup)
         {
@@ -26,55 +19,30 @@
                 <DataAnnotationsValidator />
                 <ValidationSummary class="text-red-500 mb-4" />
 
-<<<<<<< HEAD
-                <!-- EXPLICIT 2-COLUMN GRID: This forces 2 fields side-by-side -->
-                <div class="grid grid-cols-2 gap-x-4 gap-y-3">
-                    <!-- Row 1: Full Name (Col 1) and Email (Col 2) -->
+                <!-- Two-column grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Full Name -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                         <InputText @bind-Value="registerModel.Name" class="input-field" />
                     </div>
 
+                    <!-- Email -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <InputText type="email" @bind-Value="registerModel.Email" class="input-field" />
-                    </div>
-
-                    <!-- Row 2: Phone Number (Col 1) and Role (Col 2) -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <InputText type="tel" @bind-Value="registerModel.Phone" class="input-field" />
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                        <InputSelect @bind-Value="registerModel.Role" class="input-field">
-=======
-                <!-- Two-column grid layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Full Name -->
-                    <div class="form-group">
-                        <label class="font-semibold text-gray-700">Full Name</label>
-                        <InputText @bind-Value="registerModel.Name" class="form-control w-full p-3 border border-gray-300 rounded-lg" />
-                    </div>
-
-                    <!-- Email -->
-                    <div class="form-group">
-                        <label class="font-semibold text-gray-700">Email</label>
-                        <InputText @bind-Value="registerModel.Email" type="email" class="form-control w-full p-3 border border-gray-300 rounded-lg" />
+                        <InputText @bind-Value="registerModel.Email" type="email" class="input-field" />
                     </div>
 
                     <!-- Phone -->
-                    <div class="form-group">
-                        <label class="font-semibold text-gray-700">Phone Number</label>
-                        <InputText @bind-Value="registerModel.Phone" type="tel" class="form-control w-full p-3 border border-gray-300 rounded-lg" />
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <InputText @bind-Value="registerModel.Phone" type="tel" class="input-field" />
                     </div>
 
                     <!-- Role -->
-                    <div class="form-group">
-                        <label class="font-semibold text-gray-700">Role</label>
-                        <InputSelect @bind-Value="registerModel.Role" class="form-control w-full p-3 border border-gray-300 rounded-lg">
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                        <InputSelect @bind-Value="registerModel.Role" class="input-field">
                             <option value="">-- Select Role --</option>
                             <option value="Marketing_Team">Marketing Team</option>
                             <option value="Medical_Team">Medical Team</option>
@@ -86,17 +54,10 @@
                         </InputSelect>
                     </div>
 
-<<<<<<< HEAD
-                    <!-- Row 3: Territory (Col 1) and Preferred Language (Col 2) -->
+                    <!-- Territory -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Territory</label>
                         <InputSelect @bind-Value="registerModel.Territory" class="input-field">
-=======
-                    <!-- Territory -->
-                    <div class="form-group">
-                        <label class="font-semibold text-gray-700">Territory</label>
-                        <InputSelect @bind-Value="registerModel.Territory" class="form-control w-full p-3 border border-gray-300 rounded-lg">
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
                             <option value="">-- Select Territory --</option>
                             <option value="North">North</option>
                             <option value="South">South</option>
@@ -105,16 +66,10 @@
                         </InputSelect>
                     </div>
 
-<<<<<<< HEAD
+                    <!-- Preferred Language -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Language</label>
                         <InputSelect @bind-Value="registerModel.PreferredLanguage" class="input-field">
-=======
-                    <!-- Preferred Language -->
-                    <div class="form-group">
-                        <label class="font-semibold text-gray-700">Preferred Language</label>
-                        <InputSelect @bind-Value="registerModel.PreferredLanguage" class="form-control w-full p-3 border border-gray-300 rounded-lg">
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
                             <option value="">-- Select Language --</option>
                             <option value="English">English</option>
                             <option value="Hindi">Hindi</option>
@@ -122,52 +77,34 @@
                         </InputSelect>
                     </div>
 
-                    <!-- Optional: HCP Specialty (Spans both columns) -->
+                    <!-- HCP Specialty (full width if Role = HCP) -->
                     @if (registerModel.Role == "HCP")
                     {
-                        <!-- col-span-2 ensures this field takes up the full width below the grid -->
-                        <div class="col-span-2 mt-1">
+                        <div class="col-span-2 mt-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Specialty</label>
                             <InputText @bind-Value="registerModel.Specialty" class="input-field" />
                         </div>
                     }
                 </div>
 
-<<<<<<< HEAD
                 @if (!string.IsNullOrEmpty(errorMessage))
                 {
                     <p class="text-red-600 mt-4 text-center">@errorMessage</p>
                 }
 
-                <button type="submit" class="btn btn-primary w-full mt-6">Register</button>
-=======
-                <div class="mt-8 text-center">
-                    <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 px-8 rounded-lg w-full md:w-1/2 shadow-md transition-all">
-                        Register
-                    </button>
-                </div>
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
+                <button type="submit" class="btn-primary w-full mt-6">Register</button>
             </EditForm>
         }
 
         <!-- Success Popup -->
         @if (showApprovalPopup)
         {
-<<<<<<< HEAD
             <div class="popup-overlay">
                 <div class="popup">
                     <h3 class="text-lg font-semibold text-green-600 mb-2">Registration Successful</h3>
                     <p class="text-gray-700 mb-2">Your registration has been submitted for admin approval.</p>
                     <p class="text-gray-500 text-sm mb-4">You’ll receive an email once approved.</p>
-                    <button @onclick="GoToLogin" class="btn btn-primary w-full">Go to Login</button>
-=======
-            <div class="popup-overlay fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                <div class="popup bg-white p-6 rounded-lg text-center shadow-lg max-w-md">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">Registration Successful</h3>
-                    <p class="mb-2">Your registration has been submitted. Please wait for admin approval.</p>
-                    <p class="mb-4">You will receive an email with login credentials once approved.</p>
-                    <button @onclick="GoToLogin" class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-6 rounded-lg">Go to Login</button>
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
+                    <button @onclick="GoToLogin" class="btn-primary w-full">Go to Login</button>
                 </div>
             </div>
         }
@@ -175,32 +112,19 @@
         <!-- Email Exists Popup -->
         @if (showEmailExistsPopup)
         {
-<<<<<<< HEAD
             <div class="popup-overlay">
                 <div class="popup">
                     <h3 class="text-lg font-semibold text-red-600 mb-2">Email Already Exists</h3>
                     <p class="text-gray-700 text-sm mb-4">
                         The email you entered is already registered. Please use a different email or login.
                     </p>
-                    <button @onclick="CloseEmailExistsPopup" class="btn btn-secondary w-full">Close</button>
-=======
-            <div class="popup-overlay fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                <div class="popup bg-white p-6 rounded-lg text-center shadow-lg max-w-md">
-                    <h3 class="text-xl font-semibold mb-2 text-red-600">Email Already Exists</h3>
-                    <p class="mb-4">The email you entered is already registered. Please use a different email or login.</p>
-                    <button @onclick="CloseEmailExistsPopup" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg">Close</button>
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
+                    <button @onclick="CloseEmailExistsPopup" class="btn-secondary w-full">Close</button>
                 </div>
             </div>
         }
 
-<<<<<<< HEAD
         <p class="text-center mt-6 text-gray-600 text-sm">
             Already have an account? <a href="/login" class="text-blue-600 hover:underline font-medium">Login here</a>
-=======
-        <p class="text-center mt-6 text-white">
-            Already have an account? <a href="/login" class="font-semibold underline hover:text-gray-200">Login here</a>
->>>>>>> 5670bff28b2ad6437f8a4c84e4085d786222ff86
         </p>
     </div>
 </div>
@@ -286,13 +210,12 @@
     }
 }
 
-<!-- Unified and simplified styling to ensure consistent look with the narrow login form -->
 <style>
-    /* Styling for all form inputs (InputText, InputSelect) */
+    /* Inputs */
     .input-field {
         background-color: white;
-        border: 1px solid #d1d5db; /* gray-300 */
-        border-radius: 0.5rem; /* rounded-lg */
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
         padding: 0.6rem 1rem;
         width: 100%;
         outline: none;
@@ -300,13 +223,13 @@
     }
 
         .input-field:focus {
-            border-color: #3b82f6; /* blue-500 */
+            border-color: #3b82f6;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
 
-    /* Primary Button Style */
+    /* Buttons */
     .btn-primary {
-        background-color: #7c3aed; /* Deep purple/blue for primary action */
+        background-color: #7c3aed;
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 0.5rem;
@@ -315,13 +238,13 @@
     }
 
         .btn-primary:hover {
-            background-color: #6d28d9; /* Slightly darker purple on hover */
+            background-color: #6d28d9;
             box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
         }
 
     .btn-secondary {
-        background-color: #e5e7eb; /* light gray for secondary action */
-        color: #4b5563; /* dark gray text */
+        background-color: #e5e7eb;
+        color: #4b5563;
         padding: 0.75rem 1.5rem;
         border-radius: 0.5rem;
         font-weight: 600;
@@ -329,10 +252,10 @@
     }
 
         .btn-secondary:hover {
-            background-color: #d1d5db; /* Darker gray on hover */
+            background-color: #d1d5db;
         }
 
-    /* Pop-up Styles */
+    /* Popups */
     .popup-overlay {
         position: fixed;
         inset: 0;
@@ -352,6 +275,4 @@
         max-width: 20rem;
         width: 100%;
     }
-
-    /* The .form-group margin is no longer needed/used, relying on the grid gap */
 </style>

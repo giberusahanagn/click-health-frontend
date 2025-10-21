@@ -1,3 +1,11 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET build artifacts
 bin/
 obj/
-.vs/
+
+# Copilot cache / temp files
+ClickHealthFrontend/.vs/**/CopilotIndices/

@@ -1,4 +1,4 @@
-using ClickHealthFrontend;
+﻿using ClickHealthFrontend;
 using ClickHealthFrontend.Auth;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;

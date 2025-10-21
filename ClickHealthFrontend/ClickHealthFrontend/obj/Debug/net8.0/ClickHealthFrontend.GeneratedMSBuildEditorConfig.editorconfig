@@ -28,6 +28,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Layout/Component.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/LENOVO/source/repos/ClickHealthFrontend/ClickHealthFrontend/Layout/ContentTable.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XENvbnRlbnRUYWJsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

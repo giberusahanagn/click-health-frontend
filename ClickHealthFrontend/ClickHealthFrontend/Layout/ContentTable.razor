@@ -17,7 +17,7 @@
                 <th class="px-4 py-2 text-left">Description</th>
                 <th class="px-4 py-2 text-left">View PDF</th>
                 <th class="px-4 py-2 text-left">View Video</th>
-                <th class="px-4 py-2 text-left">End Date</th>
+                <th class="px-4 py-2 text-left">Expiry Date</th>
                 <th class="px-4 py-2 text-left">Actions</th>
             </tr>
         </thead>
@@ -25,13 +25,13 @@
             @foreach (var item in PendingContents)
             {
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Title) ? item.Title : "N/A")</td>
-                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Language) ? item.Language : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Therapy) ? item.Therapy : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.ContentLanguage) ? item.ContentLanguage : "N/A")</td>
                     <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
                     <td class="px-4 py-2">
-                        @if (!string.IsNullOrEmpty(item.PdfUrl))
+                        @if (!string.IsNullOrEmpty(item.ViewPdf))
                         {
-                            <a href="@item.PdfUrl" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                            <a href="@item.ViewPdf" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
                         }
                         else
                         {
@@ -39,19 +39,25 @@
                         }
                     </td>
                     <td class="px-4 py-2">
-                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        @if (!string.IsNullOrEmpty(item.ViewVideo))
                         {
-                            <a href="@item.VideoUrl" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                            <a href="@item.ViewVideo" target="_blank" class="text-blue-600 hover:underline">View Video</a>
                         }
                         else
                         {
                             <span class="text-gray-400">N/A</span>
                         }
                     </td>
-                    <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                    <td class="px-4 py-2">@((item.EndDate?.ToString("yyyy-MM-dd")) ?? "N/A")</td>
                     <td class="px-4 py-2 space-x-2">
-                        <button class="bg-green-500 text-white px-2 py-1 rounded" @onclick="@(() => OnApprove.InvokeAsync(item.ContentId))">Approve</button>
-                        <button class="bg-red-500 text-white px-2 py-1 rounded" @onclick="@(() => OnReject.InvokeAsync(item.ContentId))">Reject</button>
+                        <button class="bg-green-500 text-white px-2 py-1 rounded"
+                                @onclick="@(() => OnApprove.InvokeAsync(item.ContentId))">
+                            Approve
+                        </button>
+                        <button class="bg-red-500 text-white px-2 py-1 rounded"
+                                @onclick="@(() => OnReject.InvokeAsync(item.ContentId))">
+                            Reject
+                        </button>
                     </td>
                 </tr>
             }
@@ -70,20 +76,20 @@
                 <th class="px-4 py-2 text-left">Description</th>
                 <th class="px-4 py-2 text-left">View PDF</th>
                 <th class="px-4 py-2 text-left">View Video</th>
-                <th class="px-4 py-2 text-left">End Date</th>
+                <th class="px-4 py-2 text-left">Expiry Date</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in ApprovedContents)
             {
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Title) ? item.Title : "N/A")</td>
-                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Language) ? item.Language : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Therapy) ? item.Therapy : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.ContentLanguage) ? item.ContentLanguage : "N/A")</td>
                     <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
                     <td class="px-4 py-2">
-                        @if (!string.IsNullOrEmpty(item.PdfUrl))
+                        @if (!string.IsNullOrEmpty(item.ViewPdf))
                         {
-                            <a href="@item.PdfUrl" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                            <a href="@item.ViewPdf" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
                         }
                         else
                         {
@@ -91,16 +97,16 @@
                         }
                     </td>
                     <td class="px-4 py-2">
-                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        @if (!string.IsNullOrEmpty(item.ViewVideo))
                         {
-                            <a href="@item.VideoUrl" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                            <a href="@item.ViewVideo" target="_blank" class="text-blue-600 hover:underline">View Video</a>
                         }
                         else
                         {
                             <span class="text-gray-400">N/A</span>
                         }
                     </td>
-                    <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                    <td class="px-4 py-2">@((item.EndDate?.ToString("yyyy-MM-dd")) ?? "N/A")</td>
                 </tr>
             }
         </tbody>
@@ -118,20 +124,20 @@
                 <th class="px-4 py-2 text-left">Description</th>
                 <th class="px-4 py-2 text-left">View PDF</th>
                 <th class="px-4 py-2 text-left">View Video</th>
-                <th class="px-4 py-2 text-left">End Date</th>
+                <th class="px-4 py-2 text-left">Expiry Date</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in RejectedContents)
             {
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Title) ? item.Title : "N/A")</td>
-                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Language) ? item.Language : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Therapy) ? item.Therapy : "N/A")</td>
+                    <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.ContentLanguage) ? item.ContentLanguage : "N/A")</td>
                     <td class="px-4 py-2">@(!string.IsNullOrEmpty(item.Description) ? item.Description : "N/A")</td>
                     <td class="px-4 py-2">
-                        @if (!string.IsNullOrEmpty(item.PdfUrl))
+                        @if (!string.IsNullOrEmpty(item.ViewPdf))
                         {
-                            <a href="@item.PdfUrl" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
+                            <a href="@item.ViewPdf" target="_blank" class="text-blue-600 hover:underline">View PDF</a>
                         }
                         else
                         {
@@ -139,16 +145,16 @@
                         }
                     </td>
                     <td class="px-4 py-2">
-                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        @if (!string.IsNullOrEmpty(item.ViewVideo))
                         {
-                            <a href="@item.VideoUrl" target="_blank" class="text-blue-600 hover:underline">View Video</a>
+                            <a href="@item.ViewVideo" target="_blank" class="text-blue-600 hover:underline">View Video</a>
                         }
                         else
                         {
                             <span class="text-gray-400">N/A</span>
                         }
                     </td>
-                    <td class="px-4 py-2">@item.EndDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
+                    <td class="px-4 py-2">@((item.EndDate?.ToString("yyyy-MM-dd")) ?? "N/A")</td>
                 </tr>
             }
         </tbody>
@@ -160,19 +166,21 @@
     [Parameter] public EventCallback<string> OnApprove { get; set; }
     [Parameter] public EventCallback<string> OnReject { get; set; }
 
-    private List<ContentDto> PendingContents => Items.Where(i => i.Status == "Pending").ToList();
+    // ✅ Fix: match backend statuses exactly
+    private List<ContentDto> PendingContents => Items.Where(i => i.Status == "PendingApproval").ToList();
     private List<ContentDto> ApprovedContents => Items.Where(i => i.Status == "Approved").ToList();
     private List<ContentDto> RejectedContents => Items.Where(i => i.Status == "Rejected").ToList();
 
     public class ContentDto
     {
         public string ContentId { get; set; } = "";
-        public string Title { get; set; } = "";
-        public string Language { get; set; } = "";
+        public string Therapy { get; set; } = "";
+        public string ContentLanguage { get; set; } = "";
         public string Description { get; set; } = "";
+        public string ViewPdf { get; set; } = "";
+        public string ViewVideo { get; set; } = "";
+        public string Status { get; set; } = "";
+        public string UploadedBy { get; set; } = "";
         public DateTime? EndDate { get; set; }
-        public string PdfUrl { get; set; } = "";
-        public string VideoUrl { get; set; } = "";
-        public string Status { get; set; } = "Pending"; // "Pending", "Approved", "Rejected"
     }
 }
