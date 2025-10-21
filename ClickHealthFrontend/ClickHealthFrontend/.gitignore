@@ -9,3 +9,4 @@ obj/
 
 # Copilot cache / temp files
 ClickHealthFrontend/.vs/**/CopilotIndices/
+.vs/
